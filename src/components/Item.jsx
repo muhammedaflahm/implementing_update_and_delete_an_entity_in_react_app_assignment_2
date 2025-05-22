@@ -1,26 +1,14 @@
-const Item = ({ item }) => {
-    const handleDelete = async () => {
-      try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_URI}/doors/${item.id}`, {
-          method: "DELETE",
-        });
-  
-        if (!response.ok) throw new Error("Failed to delete item");
-  
-        alert("Item deleted successfully!");
-        window.location.reload(); // Refresh list after deletion
-      } catch (err) {
-        alert(`Error: ${err.message}`);
-      }
-    };
-  
+const Item = ({ item, onDelete }) => {
     return (
-      <div>
-        <p>{item.name}</p>
-        <button onClick={handleDelete}>Delete</button>
+      <div style={{ marginBottom: "10px" }}>
+        <span>{item.name}</span>
+        <button onClick={() => onDelete(item.id)} style={{ marginLeft: "10px" }}>
+          Delete
+        </button>
+        {/* Optional Edit Button */}
+        {/* <button style={{ marginLeft: "5px" }}>Edit</button> */}
       </div>
     );
   };
   
   export default Item;
-  
